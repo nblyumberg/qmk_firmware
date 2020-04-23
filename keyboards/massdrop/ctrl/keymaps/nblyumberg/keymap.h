@@ -46,13 +46,16 @@ uint16_t rgb_time_out_saved_seconds;    // The saved user config for RGB timeout
 led_flags_t rgb_time_out_saved_flag;    // Store LED flag before timeout so it can be restored when LED is turned on again.
 
 enum layout_names {
-    _KL=0,       // Keys Layout: The main keyboard layout that has all the characters
-    _FL,         // Function Layout: The function key activated layout with default functions and some added ones
-    _ML,         // Mouse Layout: Mouse Keys and mouse movement
-    _GL,         // GIT Layout: GIT shortcuts and macros
-    _VL,         // VIM Layout: VIM shorcuts and macros
-    _YL,         // Yakuake Layout: Yakuake drop-down terminal shortcuts and macros
-    _EL,         // KDE Layout: Shortcuts for KDE desktop using default KDE shortcuts settings
+    _BASE_LAYER=0,        // Keys Layout: The main keyboard layout that has all the characters
+    _SHORTCUT_LAYER,      // My frequently used shortcuts
+    _FUNCTION_LAYER,      // Function & Quantum layer 
+    _KL,                  // Keys Layout: The main keyboard layout that has all the characters
+    _FL,                  // Function Layout: The function key activated layout with default functions and some added ones
+    _ML,                  // Mouse Layout: Mouse Keys and mouse movement
+    _GL,                  // GIT Layout: GIT shortcuts and macros
+    _VL,                  // VIM Layout: VIM shorcuts and macros
+    _YL,                  // Yakuake Layout: Yakuake drop-down terminal shortcuts and macros
+    _EL,                  // KDE Layout: Shortcuts for KDE desktop using default KDE shortcuts settings
 };
 
 enum tapdance_keycodes {
