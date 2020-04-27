@@ -60,8 +60,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_FUNCTION_LAYER] = LAYOUT(
         _______, DM_PLY1, DM_PLY2, _______,  _______, DM_REC1, DM_REC2, _______,  _______,  DM_RSTP, _______, KC_WAKE, KC_SLEP,          KC_MUTE, TERM_ON, RGB_TOG,
-        _______, _______, TG(_ML), TG(_GL),  TG(_VL), TG(_YL), _______, _______,  _______,  ROUT_FM, ROUT_TG, ROUT_VD, ROUT_VI, _______, KC_MSTP, KC_MPLY, KC_VOLU,
-        RGB_M_P, RGB_SPD, RGB_VAI, RGB_SPI,  RGB_HUI, RGB_SAI, _______, U_T_AUTO, U_T_AGCR, _______, _______, _______, _______, _______, KC_MPRV, KC_MNXT, KC_VOLD,
+        _______, _______, TG(_ML), TG(_GL),  TG(_VL), TG(_YL), _______, _______,  _______,  ROUT_FM, ROUT_TG, RGB_VAD, RGB_VAI, _______, KC_MSTP, KC_MPLY, KC_VOLU,
+        RGB_M_P, RGB_SPD, RGB_VAI, RGB_SPI,  RGB_HUI, RGB_SAI, _______, U_T_AUTO, U_T_AGCR, _______, _______, ROUT_VD, ROUT_VI, _______, KC_MPRV, KC_MNXT, KC_VOLD,
         _______, RGB_RMOD,RGB_VAD, RGB_MOD,  RGB_HUD, RGB_SAD, _______, _______,  _______,  _______, _______, _______, _______,
         _______, RGB_TOG, _______, COPY_ALL, _______, MD_BOOT, NK_TOGG, _______,  _______,  _______, _______, _______,                            _______,
         _______, _______, _______,                    _______,                              _______, TG(_FL), _______, _______,          _______, _______, _______
@@ -149,21 +149,59 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define _______ {0, 0, 0}
 
 const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
+    [_BASE_LAYER] = {
+        RED,  CYAN,  CYAN,  CYAN, CYAN, GREEN,  GREEN,   GREEN,   GREEN,  CYAN,   CYAN, CYAN,  CYAN,  GREEN,    GREEN,   GREEN,
+        CYAN,     CYAN,  CYAN,  CYAN, CYAN, CYAN,  CYAN,   CYAN,   CYAN,  CYAN,   CYAN, CYAN,  CYAN,  GREEN,    GREEN,   GREEN,   GREEN,
+        GREEN,     CYAN,  CYAN,  CYAN, CYAN, CYAN,  CYAN,   CYAN,   CYAN,  CYAN,   CYAN, CYAN,  CYAN,  CYAN,    GREEN,   GREEN,   GREEN,
+        GREEN,     CYAN,  CYAN,  CYAN, CYAN, CYAN,  CYAN,   CYAN,   CYAN,  CYAN,   CYAN, CYAN,  GREEN,
+        GREEN,     CYAN,  CYAN,  CYAN, CYAN, CYAN,  CYAN,   CYAN,   CYAN,  CYAN,   CYAN, GREEN,                              WHITE,
+        GREEN,     GREEN,  GREEN,                   CYAN,                            GREEN, GREEN,  GREEN,  GREEN,         WHITE, WHITE, WHITE,
+        //Underglow
+        //Bottom, right corner to left corner: 
+        CYAN, GREEN ,CYAN, GREEN ,CYAN, GREEN ,CYAN, GREEN ,CYAN, GREEN ,CYAN, GREEN ,CYAN, 
+        //Left side
+        GREEN ,CYAN, GREEN, 
+        //Top, left corner to right corner:
+        CYAN, GREEN ,CYAN, GREEN ,CYAN, GREEN ,CYAN, GREEN ,CYAN, GREEN ,CYAN, GREEN ,CYAN,        
+        //Right side
+        GREEN, CYAN, GREEN
+    },
     [_SHORTCUT_LAYER] = {
-        _______,  TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  RED,    GREEN,   BLUE,
+
+        RED,  TEAL,  TEAL,  TEAL, TEAL, CHART,  CHART,   CHART,   CHART,  TEAL,   TEAL, TEAL,  TEAL,  RED,    GREEN,   BLUE,
         GOLD,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  TEAL,    TEAL,   TEAL,   GREEN,
-        TEAL,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  TEAL,    TEAL,   TEAL,   RED,
-        GOLD,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,
-        TEAL,     TEAL,  TEAL,  TEAL, TEAL, GOLD,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,                              RED,
-        TEAL,     TEAL,  TEAL,                   TEAL,                            TEAL, TEAL,  TEAL,  TEAL,         CORAL, GREEN, ORANGE
+        CHART,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  TEAL,    TEAL,   TEAL,   RED,
+        RED,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  CHART,
+        CHART,     TEAL,  TEAL,  TEAL, TEAL, RED,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, CHART,                              RED,
+        CHART,     CHART,  CHART,                   TEAL,                            CHART, CHART,  CHART,  CHART,    CORAL, GREEN, ORANGE,
+        //Underglow
+        //Bottom, right to left: 
+        RED, RED ,RED, RED ,RED, RED ,RED, RED ,RED, RED ,RED, RED ,RED, 
+        //Left side
+        GREEN ,GREEN, GREEN, 
+        //Top, left to right
+        RED, RED ,RED, RED ,RED, RED ,RED, RED ,RED, RED ,RED, RED ,RED, 
+        //Right side
+        GREEN, GREEN, GREEN
+
     },
     [_FUNCTION_LAYER] = {
-        _______,  TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  TEAL,    TEAL,   TEAL,
+        RED,  TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  TEAL,    TEAL,   TEAL,
         GOLD,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  TEAL,    TEAL,   TEAL,   GREEN,
         TEAL,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  TEAL,    TEAL,   TEAL,   RED,
         GOLD,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,
         TEAL,     TEAL,  TEAL,  TEAL, TEAL, GOLD,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,                              RED,
-        TEAL,     TEAL,  TEAL,                   TEAL,                            TEAL, TEAL,  TEAL,  TEAL,         CORAL, GREEN, ORANGE
+        TEAL,     TEAL,  TEAL,                   TEAL,                            TEAL, TEAL,  TEAL,  TEAL,         CORAL, GREEN, ORANGE,
+        //Underglow
+        //Bottom, right to left: 
+        YELLOW, YELLOW ,YELLOW, YELLOW ,YELLOW, YELLOW ,YELLOW, YELLOW ,YELLOW, YELLOW ,YELLOW, YELLOW ,YELLOW, 
+        //Left side
+        GREEN ,GREEN, GREEN, 
+        //Top, left to right
+        YELLOW, YELLOW ,YELLOW, YELLOW ,YELLOW, YELLOW ,YELLOW, YELLOW ,YELLOW, YELLOW ,YELLOW, YELLOW ,YELLOW, 
+        //Right side
+        GREEN, GREEN, GREEN
+
     },
     [_FL] = {
         _______, CORAL,   CORAL,   _______, _______, CORAL,   CORAL,   _______, _______, CORAL,   _______, YELLOW,  YELLOW,           TEAL,    GOLD,   GOLD,
@@ -393,7 +431,50 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 void set_layer_color(int layer) {
-    if (layer == _BASE_LAYER) { return; }
+//    if (layer == _BASE_LAYER) { return; }
+    if (layer == _BASE_LAYER) { 
+        // Set the Underglow for Base Layer
+        int r = 0;
+        int g = 255;
+        int b = 0;
+        for (int i = RGB_UNDERGLOW_START; i < RGB_UNDERGLOW_END; i=i+2) {
+            rgb_matrix_set_color (i,r,g,b);
+        }
+    }
+    /*
+    if (layer == _FUNCTION_LAYER) {
+        // Set the Underglow for Function Layer
+        int r = 255;
+        int g = 0;
+        int b = 0;
+        for (int i = RGB_UNDERGLOW_START; i < RGB_UNDERGLOW_END; i++) {
+            rgb_matrix_set_color (i,r,g,b);
+        }
+    }
+    if (layer == _SHORTCUT_LAYER) {
+        // Set the Underglow for Shortcut Layer
+        int r = 255;
+        int g = 255;
+        int b = 0;
+        for (int i = RGB_UNDERGLOW_START; i < RGB_UNDERGLOW_END; i++) {
+            rgb_matrix_set_color (i,r,g,b);
+        }
+    } */
+/*    if (layer == _SHORTCUT_LAYER){
+        for (int i = 88; i < 119; i++) {
+                rgb_matrix_set_color(i, 255, 0, 0);
+            }
+        }      
+        return;
+    }
+    if (layer == _FUNCTION_LAYER){
+        for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
+            if (g_led_config.flags[i] == 2) {
+                rgb_matrix_set_color(i, 255, 255, 0);
+            }
+        }
+        return;
+    } */
     for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
         HSV hsv = {
             .h = pgm_read_byte(&ledmap[layer][i][0]),
@@ -413,13 +494,27 @@ void set_layer_color(int layer) {
 }
 
 void rgb_matrix_indicators_user(void) {
+    led_t led_state = host_keyboard_led_state();
+    set_layer_color(get_highest_layer(layer_state));
+    if (led_state.caps_lock) {
+        rgb_matrix_set_color(50,255,0,0);
+        for (int i = 1; i < DRIVER_LED_TOTAL; i=i+2) {
+            if (g_led_config.flags[i] == 2) {
+                rgb_matrix_set_color(i, 255, 0, 0);
+            }
+        }
+//        rgb_matrix_set_color(0, 255, 0, 0); //make the escape red
+//        rgb_matrix_set_color(76, 255,0,0);
+//        rgb_matrix_set_color(85, 255,0,0);
+//        rgb_matrix_set_color(86, 255,0,0);
+    }    
     if (g_suspend_state || disable_layer_color ||
         rgb_matrix_get_flags() == LED_FLAG_NONE ||
         rgb_matrix_get_flags() == LED_FLAG_UNDERGLOW) {
             return;
         }
-    rgb_matrix_set_color(0, 255, 0, 0);
-    set_layer_color(get_highest_layer(layer_state));
+
+
 }
 
 /* This is a test function for Raw HID, which is currently not implemented for this keyboard */

@@ -1,16 +1,23 @@
-# Massdrop Ctrl Endgame
+# Massdrop Ctrl nblyumberg
 
-This keymap is here to show some love to the MD Ctrl.
+An alternate keymap derived from the Endgame keymap. Some more love to the MD Ctrl.
 
-## Layers
+## Layers & RGB Notes
+
+Creating additional layers with QMK is straighforward. What I found out was that the RGB modifications to work with layers was the challenge. The per key RGB is possible
+There are 2 different regions on the CTRL board, the main per key LEDS that start at index of 1 (ESC) in the top left and go to 87 (Right arrow). Subsequent to that, the remainder of the LEDs are used for the underglow (88 in the bottom right and going to the left, up and around ending at 119)
 
 ### Typing Layer
 
-![Typing Layer](https://imgur.com/QUIU2SL.png)
+![Typing Layer]
+
+### Shortcut Layer
+
+![Function Layer]
 
 ### Function Layer
 
-![Function Layer](https://imgur.com/4q4ld4X.png)
+![Function Layer]
 
 ### Mouse Layer
 

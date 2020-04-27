@@ -8,6 +8,7 @@
 #define MILLISECONDS_IN_SECOND 1000
 
 // These are just to make it neater to use builtin HSV values in the keymap
+#define WHITE {HSV_WHITE}
 #define RED {HSV_RED}
 #define CORAL {HSV_CORAL}
 #define ORANGE {HSV_ORANGE}
@@ -25,6 +26,10 @@
 #define PURPLE {HSV_PURPLE}
 #define MAGENT {HSV_MAGENTA}
 #define PINK {HSV_PINK}
+
+//LED CONFIG
+#define RGB_UNDERGLOW_START 87
+#define RGB_UNDERGLOW_END 119
 
 //========================================================== CONFIGURABLE DEFAULTS ==========================================================
 #define RGB_DEFAULT_TIME_OUT 30
