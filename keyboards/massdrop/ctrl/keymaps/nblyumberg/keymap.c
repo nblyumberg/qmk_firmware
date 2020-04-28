@@ -31,6 +31,12 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_CTRL_TERM] = ACTION_TAP_DANCE_DOUBLE(KC_LCTRL, LCA(KC_T)),
 };
 
+const qk_ucis_symbol_t ucis_symbol_table[] = UCIS_TABLE(
+    UCIS_SYM("poop", 0x1F4A9), // 💩
+    UCIS_SYM("rofl", 0x1F923), // 🤣
+    UCIS_SYM("kiss", 0x1F619)  // 😙
+);
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
     [DEFAULT] = LAYOUT(
@@ -52,10 +58,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_SHORTCUT_LAYER] = LAYOUT(
         _______, KC_F13 , KC_F14,  KC_F15,   KC_F16,  KC_F17,  KC_F18,  KC_F19 ,  KC_F20 ,  KC_F21,  KC_F22,  KC_F23,  KC_F24,            RGB_MOD, _______, RGB_TOG,
-        KC_CALC, _______, _______, _______,  _______, _______, _______, _______,  _______,  _______, _______, _______, _______, _______,  _______, _______, KC_VOLU,
+        KC_CALC, UC_SHRUG1, UC_SHRUG2, _______,  _______, _______, _______, _______,  _______,  _______, _______, _______, _______, _______,  _______, _______, KC_VOLU,
         _______, _______, _______, _______,  _______, _______, _______, _______,  _______,  _______, _______, _______, _______, _______,  _______, _______, KC_VOLD,
         KC_CAPS, _______, _______, _______,  _______, _______, _______, _______,  _______,  _______, _______, _______, _______,
-        _______, _______, _______, _______, _______,  MD_BOOT, _______, _______,  _______,  _______, _______, _______,                            KC_MSTP,
+        _______, _______, _______, _______, _______,  _______, _______, _______,  _______,  _______, _______, _______,                            KC_MSTP,
         _______, _______, _______,                    _______,                              _______, _______, _______, _______,          KC_MPRV, KC_MPLY, KC_MNXT
     ),
     [_FUNCTION_LAYER] = LAYOUT(
@@ -154,8 +160,8 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
         CYAN,     CYAN,  CYAN,  CYAN, CYAN, CYAN,  CYAN,   CYAN,   CYAN,  CYAN,   CYAN, CYAN,  CYAN,  GREEN,    GREEN,   GREEN,   GREEN,
         GREEN,     CYAN,  CYAN,  CYAN, CYAN, CYAN,  CYAN,   CYAN,   CYAN,  CYAN,   CYAN, CYAN,  CYAN,  CYAN,    GREEN,   GREEN,   GREEN,
         GREEN,     CYAN,  CYAN,  CYAN, CYAN, CYAN,  CYAN,   CYAN,   CYAN,  CYAN,   CYAN, CYAN,  GREEN,
-        GREEN,     CYAN,  CYAN,  CYAN, CYAN, CYAN,  CYAN,   CYAN,   CYAN,  CYAN,   CYAN, GREEN,                              WHITE,
-        GREEN,     GREEN,  GREEN,                   CYAN,                            GREEN, GREEN,  GREEN,  GREEN,         WHITE, WHITE, WHITE,
+        GREEN,     CYAN,  CYAN,  CYAN, CYAN, CYAN,  CYAN,   CYAN,   CYAN,  CYAN,   CYAN, GREEN,                              RED,
+        GREEN,     GREEN,  GREEN,                   CYAN,                            GREEN, GREEN,  GREEN,  GREEN,         RED, RED, RED,
         //Underglow
         //Bottom, right corner to left corner: 
         CYAN, GREEN ,CYAN, GREEN ,CYAN, GREEN ,CYAN, GREEN ,CYAN, GREEN ,CYAN, GREEN ,CYAN, 
@@ -169,10 +175,10 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
     [_SHORTCUT_LAYER] = {
 
         RED,  TEAL,  TEAL,  TEAL, TEAL, CHART,  CHART,   CHART,   CHART,  TEAL,   TEAL, TEAL,  TEAL,  RED,    GREEN,   BLUE,
-        GOLD,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  TEAL,    TEAL,   TEAL,   GREEN,
+        GOLD,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  CHART,    TEAL,   TEAL,   GREEN,
         CHART,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  TEAL,    TEAL,   TEAL,   RED,
         RED,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  CHART,
-        CHART,     TEAL,  TEAL,  TEAL, TEAL, RED,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, CHART,                              RED,
+        CHART,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, CHART,                              RED,
         CHART,     CHART,  CHART,                   TEAL,                            CHART, CHART,  CHART,  CHART,    CORAL, GREEN, ORANGE,
         //Underglow
         //Bottom, right to left: 
@@ -186,12 +192,12 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
 
     },
     [_FUNCTION_LAYER] = {
-        RED,  TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  TEAL,    TEAL,   TEAL,
-        GOLD,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  TEAL,    TEAL,   TEAL,   GREEN,
-        TEAL,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  TEAL,    TEAL,   TEAL,   RED,
-        GOLD,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,
-        TEAL,     TEAL,  TEAL,  TEAL, TEAL, GOLD,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,                              RED,
-        TEAL,     TEAL,  TEAL,                   TEAL,                            TEAL, TEAL,  TEAL,  TEAL,         CORAL, GREEN, ORANGE,
+        RED,  TEAL,  TEAL,  TEAL, TEAL, CHART,  CHART,   CHART,   CHART,  TEAL,   TEAL, TEAL,  TEAL,  TEAL,    TEAL,   TEAL,
+        GOLD,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  CHART,    TEAL,   TEAL,   GREEN,
+        CHART,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  TEAL,  TEAL,    TEAL,   TEAL,   RED,
+        GOLD,     TEAL,  TEAL,  TEAL, TEAL, TEAL,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, TEAL,  CHART,
+        CHART,     TEAL,  TEAL,  TEAL, TEAL, GOLD,  TEAL,   TEAL,   TEAL,  TEAL,   TEAL, CHART,                              RED,
+        CHART,     CHART,  CHART,                   TEAL,                            CHART, CHART,  CHART,  CHART,         CORAL, GREEN, ORANGE,
         //Underglow
         //Bottom, right to left: 
         YELLOW, YELLOW ,YELLOW, YELLOW ,YELLOW, YELLOW ,YELLOW, YELLOW ,YELLOW, YELLOW ,YELLOW, YELLOW ,YELLOW, 
@@ -269,7 +275,10 @@ void matrix_init_user(void) {
 
 void keyboard_post_init_user(void) {
     rgb_matrix_enable();
+    set_unicode_input_mode(UC_LNX);
 }
+
+
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
@@ -314,6 +323,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     switch (keycode) {
+        case UC_SHRUG1:
+            if (record->event.pressed){
+                send_unicode_string("¯\\_(ツ)_/¯");
+            }
+            return true;
+        case UC_SHRUG2:
+            if (record->event.pressed){
+                send_unicode_string("¯\\(°_o)/¯");
+            }
+            return true;
         case U_T_AUTO:
             if (record->event.pressed && MODS_SHIFT && MODS_CTRL) {
                 TOGGLE_FLAG_AND_PRINT(usb_extra_manual, "USB extra port manual mode");
@@ -432,13 +451,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 void set_layer_color(int layer) {
 //    if (layer == _BASE_LAYER) { return; }
+    float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
     if (layer == _BASE_LAYER) { 
         // Set the Underglow for Base Layer
         int r = 0;
         int g = 255;
         int b = 0;
         for (int i = RGB_UNDERGLOW_START; i < RGB_UNDERGLOW_END; i=i+2) {
-            rgb_matrix_set_color (i,r,g,b);
+            rgb_matrix_set_color (i,f * r, f * g, f * b);
         }
     }
     /*
@@ -494,27 +514,30 @@ void set_layer_color(int layer) {
 }
 
 void rgb_matrix_indicators_user(void) {
+    if (rgb_matrix_config.enable){
+    float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
     led_t led_state = host_keyboard_led_state();
     set_layer_color(get_highest_layer(layer_state));
     if (led_state.caps_lock) {
-        rgb_matrix_set_color(50,255,0,0);
-        for (int i = 1; i < DRIVER_LED_TOTAL; i=i+2) {
-            if (g_led_config.flags[i] == 2) {
-                rgb_matrix_set_color(i, 255, 0, 0);
-            }
-        }
+        rgb_matrix_set_color(50,f * 255, f* 0, f * 0);
+        for (int i = RGB_UNDERGLOW_START; i < RGB_UNDERGLOW_END; i=i+2) {
+            //if (g_led_config.flags[i] == 2) {
+                rgb_matrix_set_color(i, f * 255, f * 0, f * 0); //factor in the max brightness offset
+            //}
+        } 
 //        rgb_matrix_set_color(0, 255, 0, 0); //make the escape red
 //        rgb_matrix_set_color(76, 255,0,0);
 //        rgb_matrix_set_color(85, 255,0,0);
 //        rgb_matrix_set_color(86, 255,0,0);
-    }    
+    }
+        
     if (g_suspend_state || disable_layer_color ||
         rgb_matrix_get_flags() == LED_FLAG_NONE ||
         rgb_matrix_get_flags() == LED_FLAG_UNDERGLOW) {
             return;
         }
-
-
+ //   set_layer_color(get_highest_layer(layer_state));
+    }
 }
 
 /* This is a test function for Raw HID, which is currently not implemented for this keyboard */

@@ -45,8 +45,8 @@
 #define RGB_MATRIX_KEYPRESSES         // reacts to keypresses
 // #define RGB_MATRIX_KEYRELEASES        // reacts to keyreleases (instead of keypresses)
 
-
-
+//Set start up brightness
+#define RGB_MATRIX_STARTUP_VAL 128
 //Teal and Blue
 //#define RGB_MATRIX_STARTUP_HUE 127 // Default boot color
 //#define RGB_MATRIX_STARTUP_SPD 47 //Used to determine the color for the modifiers

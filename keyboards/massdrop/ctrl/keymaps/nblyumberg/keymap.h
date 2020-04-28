@@ -84,6 +84,11 @@ enum ctrl_keycodes {
     ROUT_FM,               // RGB timeout fast mode toggle
     COPY_ALL,              // Copy all text using ctrl(a+c)
     TERMINAL,              // CTRL+ALT+T
+    UC_ANGRY,
+    UC_SHRUG1,             // ¯\_(ツ)_/¯
+    UC_SHRUG2,             // ¯\(°_o)/¯
+    UC_SHRUG3,
+    UC_SHRUG4,
 };
 
 enum string_macro_keycodes {
