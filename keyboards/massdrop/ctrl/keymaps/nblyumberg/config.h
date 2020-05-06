@@ -5,6 +5,10 @@
 #define MODS_CTRL   (get_mods() & MOD_MASK_CTRL)
 #define MODS_ALT    (get_mods() & MOD_MASK_ALT)
 
+
+#define UNICODE_SELECTED_MODES UC_WINC, UC_MAC, UC_LNX //Allow Unicode Input Mode switching
+#define UNICODE_CYCLE_PERSIST false // 
+
 // #define IS_COMMAND() (get_mods() == MOD_MASK_SHIFT)      // Key combination that allows the use of magic commands (useful for debugging)
 
 // #define NO_DEBUG                    // Disable debugging

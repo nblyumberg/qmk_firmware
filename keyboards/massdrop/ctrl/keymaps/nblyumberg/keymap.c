@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_SHORTCUT_LAYER] = LAYOUT(
         _______, KC_F13 , KC_F14,  KC_F15,   KC_F16,  KC_F17,  KC_F18,  KC_F19 ,  KC_F20 ,  KC_F21,  KC_F22,  KC_F23,  KC_F24,            RGB_MOD, _______, RGB_TOG,
-        KC_CALC, UC_SHRUG1, UC_SHRUG2, _______,  _______, UC_ANGRY, _______, _______,  _______,  _______, _______, _______, _______, _______,  _______, _______, KC_VOLU,
+        KC_CALC, UC_SHRUG1, UC_SHRUG2, UC_SHRUG3,  UC_SHRUG4, UC_ANGRY, _______, _______,  _______,  _______, _______, UNICODE_MODE_FORWARD, UNICODE_MODE_REVERSE, _______,  _______, _______, KC_VOLU,
         _______, _______, _______, _______,  _______, _______, _______, _______,  _______,  _______, _______, _______, _______, _______,  _______, _______, KC_VOLD,
         KC_CAPS, _______, _______, _______,  _______, _______, _______, _______,  _______,  _______, _______, _______, _______,
         _______, _______, _______, _______, _______,  _______, _______, _______,  _______,  _______, _______, _______,                            KC_MSTP,
@@ -333,6 +333,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 send_unicode_string("¯\\(°_o)/¯");
             }
             return true;
+        case UC_SHRUG3:
+            if (record->event.pressed){
+                send_unicode_string("¯\\__(⊙¿⊙)__/¯");
+            }
+            return true;
+        case UC_SHRUG4:
+            if (record->event.pressed){
+                send_unicode_string("¯\\__(ಠ¿ಠ)__/¯");
+            }
+            return true;    
         case UC_ANGRY:
             if (record->event.pressed){
                 send_unicode_string("{ಠʖಠ}");

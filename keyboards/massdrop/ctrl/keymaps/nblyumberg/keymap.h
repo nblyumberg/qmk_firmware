@@ -87,8 +87,8 @@ enum ctrl_keycodes {
     UC_ANGRY,
     UC_SHRUG1,             // ¯\_(ツ)_/¯
     UC_SHRUG2,             // ¯\(°_o)/¯
-    UC_SHRUG3,
-    UC_SHRUG4,
+    UC_SHRUG3,             // ¯\__(⊙¿⊙)__/¯
+    UC_SHRUG4,             // ¯\__(ಠ¿ಠ)__/¯
 };
 
 enum string_macro_keycodes {
