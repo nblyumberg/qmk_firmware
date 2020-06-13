@@ -31,6 +31,11 @@ enum custom_keycodes {
   RAISE
 };
 
+#if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
+static uint32_t rgb_preview_timer = 0;
+#endif
+extern rgblight_config_t rgblight_config;
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
@@ -50,8 +55,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, \
   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_DEL,  \
   KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
-  KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,  \
-  BL_TOGG, KC_LCTL, KC_LALT, KC_LGUI, LT(_LOWER,KC_ENT),   KC_SPC,  KC_SPC,  LT(_RAISE,KC_BSPC),   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
+  KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_SFTENT,  \
+  KC_LCTL, KC_LCTL, KC_LALT, KC_LGUI, LT(_LOWER,KC_ENT),   KC_SPC,  KC_SPC,  LT(_RAISE,KC_BSPC),   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
 ),
 /* Lower
  * ,-----------------------------------------------------------------------------------.
@@ -71,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______,   _______, _______,  _______, _______, _______, _______, _______, _______, KC_DEL,  \
   KC_DEL,  KC_LEFT,   KC_UP,   KC_DOWN,   KC_RIGHT,   _______,   _______,   KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, \
   KC_LSFT, KC_F13,   KC_F14,   KC_F15,   KC_F16,  _______,  _______,S(KC_NUHS),S(KC_NUBS),KC_HOME, KC_END, _______, \
-  RESET,   _______, _______, _______, _______, _______, _______, _______, KC_BSPC, KC_VOLD, KC_VOLU, KC_MPLY \
+  RESET,   BL_TOGG, _______, _______, _______, _______, _______, _______, KC_BSPC, KC_VOLD, KC_VOLU, KC_MPLY \
 ),
 
 /* Raise
@@ -95,3 +100,78 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   RGB_TOG, RGB_MOD, BL_INC,  BL_DEC,  _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY  \
 )
 };
+
+
+const rgblight_segment_t PROGMEM my_layer0_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+		{0,15,HSV_ORANGE}
+	);
+const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+		{0,15,HSV_GREEN}
+	);
+const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+		{0,15,HSV_RED}
+	);
+const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+		{0,15,HSV_BLUE}
+	);
+const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+		{0,15,HSV_WHITE}
+	);
+const rgblight_segment_t PROGMEM my_layer5_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+		{0,15,HSV_TEAL}
+	);
+const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+        my_layer0_layer,
+		my_layer1_layer,
+		my_layer2_layer,
+		my_layer3_layer,
+		my_layer4_layer,
+        my_layer5_layer
+	);
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    return true;
+}
+
+void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // Allow for a preview of changes when modifying RGB
+# if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
+  switch (keycode) {
+    case RGB_TOG ... VLK_TOG:
+      for (uint8_t i = 0; i < RGBLIGHT_MAX_LAYERS; i++) {
+        rgblight_set_layer_state(i, false);
+      }
+      rgb_preview_timer = timer_read32();
+      break;
+  }
+# endif
+  return;
+}
+
+//Set the appropriate layer color
+layer_state_t layer_state_set_user(layer_state_t state) {
+    rgblight_set_layer_state(1, layer_state_cmp(state, 1));
+    rgblight_set_layer_state(2, layer_state_cmp(state, 2));
+    rgblight_set_layer_state(3, layer_state_cmp(state, 3));
+    rgblight_set_layer_state(4, layer_state_cmp(state, 4));
+    rgblight_set_layer_state(5, layer_state_cmp(state, 5));
+    return state;
+}
+
+void keyboard_post_init_user(void) {
+	//Enable the LED layers
+	rgblight_layers = my_rgb_layers;
+	layer_state_set_user(layer_state);
+}
+
+void matrix_scan_user(void) {
+# if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
+    // Allow preview for
+    if (rgb_preview_timer && TIMER_DIFF_32(timer_read32(), rgb_preview_timer) > PREVIEW_TIMEOUT) {
+        rgb_preview_timer = 0;
+        default_layer_state_set_user(default_layer_state);
+        layer_state_set_user(layer_state);
+        led_update_user((led_t) host_keyboard_leds());
+    }
+# endif
+}
