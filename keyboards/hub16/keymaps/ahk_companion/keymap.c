@@ -44,9 +44,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //Layer 4 - Multimedia
         [4] = LAYOUT(
                         KC_MPLY, KC_MUTE,
-                KC_MPRV, KC_MPLY, KC_MNXT,   KC_J,
-                KC_NO,   KC_NO,   KC_NO,     LSFT(KC_3),
-                KC_NO,   RESET,   EEP_RST,   KC_K,
+                KC_MPRV, KC_MPLY, KC_U,   KC_K,
+                KC_NO,   KC_NO,   KC_ENT, KC_X,
+                KC_NO,   RESET,   LSFT(KC_HASH),   KC_J,
                 TG(5),   KC_TRNS, KC_TRNS,   KC_TRNS         //Transparent to let you go between layers
         ),
 
