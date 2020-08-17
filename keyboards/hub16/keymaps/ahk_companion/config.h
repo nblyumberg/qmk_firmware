@@ -108,18 +108,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //Define a preview timeout for RGB reviews
 #define PREVIEW_TIMEOUT 5000
-#define TAPPING_TERM 200
 
 // Enable Light Layers implementation
 #define RGBLIGHT_LAYERS
 // Allow Light Layers to override RGB off configuration
 #define RGBLIGHT_LAYERS_OVERRIDE_RGB_OFF
-
-// #define NUMBER_OF_ENCODERS 2
-#define ENCODERS_PAD_A \
-    { F6, B4 }
-#define ENCODERS_PAD_B \
-    { F5, B5 }
-
-/* Tap Dance timing */
-#define TAPPING_TERM 200
