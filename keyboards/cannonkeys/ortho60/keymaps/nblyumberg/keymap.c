@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______,   _______, _______,  _______, _______, _______, _______, _______, _______, KC_DEL,  \
   KC_DEL,  KC_LEFT,   KC_UP,   KC_DOWN,   KC_RIGHT,   _______,   _______,   KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, \
   KC_LSFT, KC_F13,   KC_F14,   KC_F15,   KC_F16,  _______,  _______,S(KC_NUHS),S(KC_NUBS),KC_HOME, KC_END, _______, \
-  RESET,   BL_TOGG, _______, _______, _______, _______, _______, _______, KC_BSPC, KC_VOLD, KC_VOLU, KC_MPLY \
+  RESET,   BL_TOGG, EEPROM_RESET, _______, _______, _______, _______, _______, KC_BSPC, KC_VOLD, KC_VOLU, KC_MPLY \
 ),
 
 /* Raise
@@ -103,22 +103,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 const rgblight_segment_t PROGMEM my_layer0_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-		{0,8,HSV_ORANGE}
+		{0,16,HSV_ORANGE}
 	);
 const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-		{0,8,HSV_GREEN}
+		{0,16,HSV_GREEN}
 	);
 const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-		{0,8,HSV_YELLOW}
+		{0,16,HSV_YELLOW}
 	);
 const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-		{0,8,HSV_BLUE}
+		{0,16,HSV_BLUE}
 	);
 const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-		{0,8,HSV_WHITE}
+		{0,16,HSV_WHITE}
 	);
 const rgblight_segment_t PROGMEM my_layer5_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-		{0,8,HSV_TEAL}
+		{0,16,HSV_TEAL}
 	);
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
         my_layer0_layer,

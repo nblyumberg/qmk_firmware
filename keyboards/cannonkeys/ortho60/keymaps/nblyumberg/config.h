@@ -4,7 +4,7 @@
 #define ONESHOT_TIMEOUT 3000
 
 #undef RGBLED_NUM
-#define RGBLED_NUM 8
+#define RGBLED_NUM 16
 
 // Undef and redefine default brightness to half of 255
 #undef RGBLIGHT_LIMIT_VAL
