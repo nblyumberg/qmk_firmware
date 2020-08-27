@@ -1,0 +1,2 @@
+AUTO_SHIFT_ENABLE = no
+COMBO_ENABLE = yes
