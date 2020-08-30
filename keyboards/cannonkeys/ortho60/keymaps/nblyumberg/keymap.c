@@ -117,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_FN] = LAYOUT_ortho_5x12( \
   KC_GRV,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,    KC_F11, \
   KC_GRV,  _______,   _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,  \
-  KC_DEL,  KC_LEFT,   KC_UP,   KC_DOWN,   KC_RIGHT,   KC_LBRC,   KC_RBRC,   KC_MINS, KC_EQL,  _______, _______, KC_BSLS, \
+  KC_DEL,  KC_LEFT,   KC_UP,   KC_DOWN,   KC_RIGHT,   KC_1,   KC_2,   KC_MINS, KC_EQL,  _______, _______, KC_BSLS, \
   _______, _______,   _______,   _______,   _______,  _______,  _______,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______, \
   RGB_TOG, RGB_MOD, BL_INC,  BL_DEC,  _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY  \
 )
@@ -131,10 +131,10 @@ const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 		{0,16,HSV_GREEN}
 	);
 const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-		{0,16,HSV_YELLOW}
+		{0,16,HSV_BLUE}
 	);
 const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-		{0,16,HSV_BLUE}
+		{0,16,HSV_YELLOW}
 	);
 const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 		{0,16,HSV_WHITE}
@@ -150,30 +150,6 @@ const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
 		my_layer4_layer,
         my_layer5_layer
 	);
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-    case LOWER:
-        if (record->event.pressed) {
-            layer_on(_LOWER);
-            update_tri_layer(_LOWER,_RAISE,_FN);
-        } else {
-            layer_off(_LOWER);
-            update_tri_layer(_LOWER,_RAISE,_FN);
-        }
-        return false;
-    case RAISE:
-        if (record->event.pressed) {
-        layer_on(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _FN);
-      } else {
-        layer_off(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _FN);
-      }
-      return false;
-    }
-return true;
-}
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
     // Allow for a preview of changes when modifying RGB
@@ -195,6 +171,7 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 //Set the appropriate layer color
 layer_state_t layer_state_set_user(layer_state_t state) {
+    state = update_tri_layer_state(state, _LOWER, _RAISE, _FN);
     rgblight_set_layer_state(1, layer_state_cmp(state, 1));
     rgblight_set_layer_state(2, layer_state_cmp(state, 2));
     rgblight_set_layer_state(3, layer_state_cmp(state, 3));
