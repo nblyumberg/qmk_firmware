@@ -12,7 +12,7 @@
 
 //Define a preview timeout for RGB reviews
 #define PREVIEW_TIMEOUT 5000
-#define TAPPING_TERM 150
+#define TAPPING_TERM 175
 
 // Enable Light Layers implementation
 #define RGBLIGHT_LAYERS
@@ -20,3 +20,4 @@
 #define RGBLIGHT_LAYERS_OVERRIDE_RGB_OFF
 
 #define TAPPING_TERM_PER_KEY
+
