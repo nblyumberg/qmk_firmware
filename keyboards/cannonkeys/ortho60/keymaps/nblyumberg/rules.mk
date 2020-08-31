@@ -1,3 +1,3 @@
-VIA_ENABLE = yes
-LTO_ENABLE = yes
+VIA_ENABLE = no
+LTO_ENABLE = no
 SLEEP_LED_ENABLE = no
