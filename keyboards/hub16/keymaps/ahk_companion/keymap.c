@@ -92,33 +92,107 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 void encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 0) { /* Left Encoder */
-        if (clockwise) {
-            tap_code(KC_MPRV);
-        } else {
-            tap_code(KC_MNXT);
+    // Define encoder behavior based on layer
+    if (layer_state_is(5)) {
+        if (index == 0) { /* Left Encoder */
+            if (clockwise) {
+                rgblight_step_noeeprom();
+            } else {
+                rgblight_step_reverse_noeeprom();
+            }
+        } else if (index == 1) { /* Right Encoder */
+            if (clockwise) {
+                tap_code(KC_1);
+            } else {
+                tap_code(KC_2);
+            }
         }
-    } else if (index == 1) { /* Right Encoder */
-        if (clockwise) {
-            tap_code(KC_VOLD);
-        } else {
-            tap_code(KC_VOLU);
+    } else if (layer_state_is(4)) {
+        if (index == 0) { /* Left Encoder */
+            if (clockwise) {
+                tap_code(KC_MPRV);
+            } else {
+                tap_code(KC_MNXT);
+            }
+        } else if (index == 1) { /* Right Encoder */
+            if (clockwise) {
+                tap_code(KC_VOLD);
+            } else {
+                tap_code(KC_VOLU);
+            }
+        }
+    } else if (layer_state_is(3)) {
+        if (index == 0) { /* Left Encoder */
+            if (clockwise) {
+                tap_code(KC_MPRV);
+            } else {
+                tap_code(KC_MNXT);
+            }
+        } else if (index == 1) { /* Right Encoder */
+            if (clockwise) {
+                tap_code(KC_VOLD);
+            } else {
+                tap_code(KC_VOLU);
+            }
+        }
+    } else if (layer_state_is(2)) {
+        if (index == 0) { /* Left Encoder */
+            if (clockwise) {
+                tap_code(KC_MPRV);
+            } else {
+                tap_code(KC_MNXT);
+            }
+        } else if (index == 1) { /* Right Encoder */
+            if (clockwise) {
+                tap_code(KC_VOLD);
+            } else {
+                tap_code(KC_VOLU);
+            }
+        }
+    } else if (layer_state_is(1)) {
+        if (index == 0) { /* Left Encoder */
+            if (clockwise) {
+                tap_code(KC_MPRV);
+            } else {
+                tap_code(KC_MNXT);
+            }
+        } else if (index == 1) { /* Right Encoder */
+            if (clockwise) {
+                tap_code(KC_VOLD);
+            } else {
+                tap_code(KC_VOLU);
+            }
+        }
+    } else {
+        if (index == 0) { /* Left Encoder */
+            if (clockwise) {
+                tap_code(KC_MPRV);
+            } else {
+                tap_code(KC_MNXT);
+            }
+        } else if (index == 1) { /* Right Encoder */
+            if (clockwise) {
+                tap_code(KC_VOLD);
+            } else {
+                tap_code(KC_VOLU);
+            }
         }
     }
 }
-void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+void post_process_record_user(uint16_t keycode, keyrecord_t* record) {
     // Allow for a preview of changes when modifying RGB
-# if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
-  switch (keycode) {
-    case RGB_TOG ... VLK_TOG:
-      for (uint8_t i = 0; i < RGBLIGHT_MAX_LAYERS; i++) {
-        rgblight_set_layer_state(i, false);
-      }
-      rgb_preview_timer = timer_read32();
-      break;
-  }
-# endif
-  return;
+#if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
+    switch (keycode) {
+        case RGB_TOG ... VLK_TOG:
+            for (uint8_t i = 0; i < RGBLIGHT_MAX_LAYERS; i++) {
+                rgblight_set_layer_state(i, false);
+            }
+            rgb_preview_timer = timer_read32();
+            break;
+    }
+#endif
+    return;
 }
 
 //Set the appropriate layer color
