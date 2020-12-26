@@ -1,24 +1,49 @@
 #include QMK_KEYBOARD_H
 
-// MOD_KC
-#define CTL_ESC MT(MOD_LCTL, KC_ESCAPE)
-#define CTL_ENT MT(MOD_LCTL, KC_ENTER)
-#define ALT_Z   MT(MOD_LALT, KC_Z)
-#define ALT_SLS MT(MOD_LALT, KC_SLASH)
-#define SU_QUOT MT(MOD_LGUI, KC_QUOTE)
-#define SU_BSLS MT(MOD_LGUI, KC_BSLS)
-#define SFT_DEL MT(MOD_LSFT, KC_DELETE)
-
-// LAYER_KC
-#define L3_SPC  LT(3, KC_SPC)
-#define L2_SPC  LT(2, KC_SPC)
-#define L1_LBRC LT(1, KC_LBRC)
-#define L1_RBRC LT(1, KC_RBRC)
-
+float layer0_song[][2] = SONG(QWERTY_SOUND);
+float layer1_song[][2] = SONG(COLEMAK_SOUND);
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // Default Layer
   LAYOUT(
     KC_A , KC_B,
-    RGB_TOG , KC_ENT
+    MO(1) , KC_ENT
+  ),
+  //2nd layer
+    LAYOUT(
+    KC_Z , KC_Y,
+    _______ , KC_ENT
   )
 };
+
+/*
+layer_state_t layer_state_set_user(layer_state_t state) {
+    static bool play_sound = true;
+    if (layer_state_cmp(state, 0)) {
+        if (play_sound) {
+            PLAY_SONG(layer0_song);
+            play_sound = false;
+        } else {
+            play_sound = true;
+        }
+    }
+    if (layer_state_cmp(state, 1)) {
+        if (!play_sound) {
+            PLAY_SONG(layer1_song);
+            play_sound = false;
+        } else {
+            play_sound = true;
+        }
+    }
+    return state;
+}
+*/
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    if (layer_state_cmp(state, 0)) {
+        PLAY_SONG(layer0_song);
+    }
+    if (layer_state_cmp(state, 1)) {
+        PLAY_SONG(layer1_song);
+    }
+    return state;
+}
