@@ -1,12 +1,19 @@
 #include QMK_KEYBOARD_H
 
-float layer0_song[][2] = SONG(QWERTY_SOUND);
+#ifdef AUDIO_ENABLE
+// Define my own sounds
+#define NICK_SOUND HD_NOTE(_C8), HD_NOTE(_D3), HD_NOTE(_C6)
+
+
+float layer0_song[][2] = SONG(NICK_SOUND);
 float layer1_song[][2] = SONG(COLEMAK_SOUND);
+#endif
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // Default Layer
   LAYOUT(
     KC_A , KC_B,
-    MO(1) , KC_ENT
+    TG(1) , KC_ENT
   ),
   //2nd layer
     LAYOUT(
