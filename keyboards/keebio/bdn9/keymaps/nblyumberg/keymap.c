@@ -16,6 +16,11 @@
 
 #include QMK_KEYBOARD_H
 
+#if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
+static uint32_t rgb_preview_timer = 0;
+#endif
+extern rgblight_config_t rgblight_config;
+
 /**
  * Layer Names
  */
@@ -74,6 +79,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
+// Light LEDs 9 & 10 in cyan when keyboard layer 1 is active
+const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {1, 1, HSV_CYAN}
+);
+
+const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {1, 1, HSV_CYAN}
+);
+
+// Now define the array of layers. Later layers take precedence
+const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    my_layer1_layer,    // Overrides caps lock layer
+    my_layer2_layer     // Overrides other layers
+);
+
+void keyboard_post_init_user(void) {
+    // Enable the LED layers
+    rgblight_layers = my_rgb_layers;
+}
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
     // Allow for a preview of changes when modifying RGB
@@ -97,9 +121,9 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
 void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == _LEFT) {
         if (clockwise) {
-            tap_code(KC_A);
+            tap_code(KC_MNXT);
         } else {
-            tap_code(KC_B);
+            tap_code(KC_MPRV);
         }
     }
     else if (index == _MIDDLE) {
@@ -116,4 +140,10 @@ void encoder_update_user(uint8_t index, bool clockwise) {
             tap_code(KC_VOLD);
         }
     }
+}
+
+void keyboard_post_init_user(void) {
+	//Enable the LED layers
+	rgblight_layers = my_rgb_layers;
+	layer_state_set_user(layer_state);
 }
