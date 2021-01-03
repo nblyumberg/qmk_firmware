@@ -57,47 +57,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         └────────┴────────┴────────┘
      */
     [BASE] = LAYOUT(
-        KC_MPLY, TG(1),   KC_MUTE,
-        KC_0,    KC_B,    KC_C,
-        KC_D,    KC_E,    KC_F
+        KC_MPLY, TG(ONE),   KC_MUTE,
+        KC_0,    TG(THREE),    TG(FOUR),
+        TG(FIVE),    TG(SIX),    TG(SEVEN)
     ),
 
     // Extra layers
     [ONE] = LAYOUT(
-        TG(0), TO(0), TG(2),
+        TO(BASE), TO(BASE), TG(TWO),
         KC_1, RESET, KC_C,
-        KC_D, EEPROM_RESET, KC_F
+        TO(BASE), TO(BASE), TG(TWO)
     ),
 
     [TWO] = LAYOUT(
-        TG(1), TO(0), TG(3),
-        KC_2, KC_B, KC_C,
-        KC_D, KC_E, KC_F
+        TG(ONE), TO(BASE), TG(THREE),
+        KC_2, EEPROM_RESET, KC_C,
+        TG(ONE), TO(BASE), TG(THREE)
     ),
     [THREE] = LAYOUT(
-        TG(2), TO(0), TG(4),
+        TG(TWO), TO(BASE), TG(FOUR),
         KC_3, KC_B, KC_C,
-        KC_D, KC_E, KC_F
+        TG(TWO), TO(BASE), TG(FOUR)
     ),
     [FOUR] = LAYOUT(
-        TG(3), TO(0), TG(5),
+        TG(THREE), TO(BASE), TG(FIVE),
         KC_4, KC_B, KC_C,
-        KC_D, KC_E, KC_F
+        TG(THREE), TO(BASE), TG(FIVE)
     ),
     [FIVE] = LAYOUT(
-        TG(4), TO(0), TG(6),
+        TG(FOUR), TO(BASE), TG(SIX),
         KC_5, KC_B, KC_C,
-        KC_D, KC_E, KC_F
+        TG(FOUR), TO(BASE), TG(SIX)
     ),
     [SIX] = LAYOUT(
-        TG(5), TO(0), TG(7),
+        TG(FIVE), TO(BASE), TG(SEVEN),
         KC_6, KC_B, KC_C,
-        KC_D, KC_E, KC_F
+        TG(FIVE), TO(BASE), TG(SEVEN)
     ),
     [SEVEN] = LAYOUT(
-        TG(6), TO(0), TO(0),
+        TG(SIX), TO(BASE), TO(BASE),
         KC_7, KC_B, KC_C,
-        KC_D, KC_E, KC_F
+        TG(SIX), TO(BASE), TO(BASE)
     ),
 
 
@@ -151,15 +151,19 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     }
 }
 
+layer_state_t layer_state_set_user(layer_state_t state){
+    xprintf("Layer State: 0b%032lb\n", state);
+    return state;
+}
+
 void rgb_matrix_indicators_user(void) {
-    //rgblight_sethsv_noeeprom(HSV_BLUE);
     switch (get_highest_layer(layer_state)) {
         case 0:
             break;
         case 1:
             // Red
             rgb_matrix_set_color_all(0,0,0);
-            rgb_matrix_set_color(6, 255, 0, 0);
+            rgb_matrix_set_color(6, 0, 255, 0);
             break;
         case 2:
             // Blue
@@ -210,7 +214,7 @@ void rgb_matrix_indicators_user(void) {
             rgb_matrix_set_color(3, 0, 255, 0);
             rgb_matrix_set_color(4, 0, 255, 0);
             rgb_matrix_set_color(5, 0, 255, 0);
-            rgb_matrix_set_color(2, 0, 255, 0);
+            rgb_matrix_set_color(1, 0, 255, 0);
             break;
         default:
             break;
