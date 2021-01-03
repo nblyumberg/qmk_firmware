@@ -101,3 +101,22 @@ void encoder_update_user(uint8_t index, bool clockwise) {
         }
     }
 }
+
+void rgb_matrix_indicators_kb(void) {
+    //rgblight_sethsv_noeeprom(HSV_BLUE);
+    switch (get_highest_layer(layer_state)) {
+        case 0:
+            break;
+        case 1:
+            // Red
+            rgb_matrix_set_color_all(0,0,0);
+            rgb_matrix_set_color(5, 255, 0, 0);
+            break;
+        case 2:
+            // Blue
+            rgb_matrix_set_color(4, 0, 255, 0);
+            break;
+        default:
+            break;
+    }
+}
