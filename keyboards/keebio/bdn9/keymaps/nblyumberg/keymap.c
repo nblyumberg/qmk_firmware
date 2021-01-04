@@ -58,46 +58,46 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [BASE] = LAYOUT(
         KC_MPLY, TG(ONE),   KC_MUTE,
-        KC_0,    TG(THREE),    TG(FOUR),
-        TG(FIVE),    TG(SIX),    TG(SEVEN)
+        KC_A,    KC_B,    KC_C,
+        KC_X,    KC_Y,    KC_Z
     ),
 
     // Extra layers
     [ONE] = LAYOUT(
         TO(BASE), TO(BASE), TG(TWO),
-        KC_1, RESET, KC_C,
-        TO(BASE), TO(BASE), TG(TWO)
+        KC_F13,    KC_F14,    KC_F15,
+        KC_F16,    KC_F17,    KC_F18
     ),
 
     [TWO] = LAYOUT(
-        TG(ONE), TO(BASE), TG(THREE),
-        KC_2, EEPROM_RESET, KC_C,
-        TG(ONE), TO(BASE), TG(THREE)
+        TG(TWO), TO(BASE), TG(THREE),
+        KC_F19, KC_F20, KC_F21,
+        KC_F22, KC_F23, KC_F24
     ),
     [THREE] = LAYOUT(
-        TG(TWO), TO(BASE), TG(FOUR),
+        TG(THREE), TO(BASE), TG(FOUR),
         KC_3, KC_B, KC_C,
-        TG(TWO), TO(BASE), TG(FOUR)
+        TG(THREE), TO(BASE), TG(FOUR)
     ),
     [FOUR] = LAYOUT(
-        TG(THREE), TO(BASE), TG(FIVE),
+        TG(FOUR), TO(BASE), TG(FIVE),
         KC_4, KC_B, KC_C,
-        TG(THREE), TO(BASE), TG(FIVE)
+        TG(FOUR), TO(BASE), TG(FIVE)
     ),
     [FIVE] = LAYOUT(
-        TG(FOUR), TO(BASE), TG(SIX),
+        TG(FIVE), TO(BASE), TG(SIX),
         KC_5, KC_B, KC_C,
-        TG(FOUR), TO(BASE), TG(SIX)
+        TG(FIVE), TO(BASE), TG(SIX)
     ),
     [SIX] = LAYOUT(
-        TG(FIVE), TO(BASE), TG(SEVEN),
+        TG(SIX), TO(BASE), TG(SEVEN),
         KC_6, KC_B, KC_C,
-        TG(FIVE), TO(BASE), TG(SEVEN)
+        TG(SIX), TO(BASE), TG(SEVEN)
     ),
     [SEVEN] = LAYOUT(
-        TG(SIX), TO(BASE), TO(BASE),
+        TG(SEVEN), TO(BASE), TG(ADJUST),
         KC_7, KC_B, KC_C,
-        TG(SIX), TO(BASE), TO(BASE)
+        TG(SEVEN), TO(BASE), TO(BASE)
     ),
 
 
@@ -117,9 +117,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         └────────┴────────┴────────┘
      */
     [ADJUST] = LAYOUT(
-        KC_MPLY, _______, KC_MUTE,
-        KC_U, RESET, KC_W,
-        KC_X, KC_Y, KC_Z
+        RGB_TOG, TO(BASE), RESET,
+        RGB_VAI, RGB_SAI, RGB_HUI,
+        RGB_VAD, RGB_SAD, RGB_HUD
     ),
 };
 
@@ -161,25 +161,21 @@ void rgb_matrix_indicators_user(void) {
         case 0:
             break;
         case 1:
-            // Red
             rgb_matrix_set_color_all(0,0,0);
             rgb_matrix_set_color(6, 0, 255, 0);
             break;
         case 2:
-            // Blue
             rgb_matrix_set_color_all(0,0,0);
             rgb_matrix_set_color(6, 0, 255, 0);
             rgb_matrix_set_color(7, 0, 255, 0);
             break;
         case 3:
-            // Blue
             rgb_matrix_set_color_all(0, 0, 0);
             rgb_matrix_set_color(6, 0, 255, 0);
             rgb_matrix_set_color(7, 0, 255, 0);
             rgb_matrix_set_color(8, 0, 255, 0);
             break;
         case 4:
-            // Blue
             rgb_matrix_set_color_all(0, 0, 0);
             rgb_matrix_set_color(6, 0, 255, 0);
             rgb_matrix_set_color(7, 0, 255, 0);
@@ -187,7 +183,6 @@ void rgb_matrix_indicators_user(void) {
             rgb_matrix_set_color(3, 0, 255, 0);
             break;
         case 5:
-            // Blue
             rgb_matrix_set_color_all(0, 0, 0);
             rgb_matrix_set_color(6, 0, 255, 0);
             rgb_matrix_set_color(7, 0, 255, 0);
@@ -196,7 +191,6 @@ void rgb_matrix_indicators_user(void) {
             rgb_matrix_set_color(4, 0, 255, 0);
             break;
         case 6:
-            // Blue
             rgb_matrix_set_color_all(0, 0, 0);
             rgb_matrix_set_color(6, 0, 255, 0);
             rgb_matrix_set_color(7, 0, 255, 0);
@@ -206,7 +200,6 @@ void rgb_matrix_indicators_user(void) {
             rgb_matrix_set_color(5, 0, 255, 0);
             break;
         case 7:
-            // Blue
             rgb_matrix_set_color_all(0, 0, 0);
             rgb_matrix_set_color(6, 0, 255, 0);
             rgb_matrix_set_color(7, 0, 255, 0);
@@ -215,6 +208,16 @@ void rgb_matrix_indicators_user(void) {
             rgb_matrix_set_color(4, 0, 255, 0);
             rgb_matrix_set_color(5, 0, 255, 0);
             rgb_matrix_set_color(1, 0, 255, 0);
+        case 8:
+            // All White
+            rgb_matrix_set_color_all(0, 0, 0);
+            rgb_matrix_set_color(6, 255, 255, 255);
+            rgb_matrix_set_color(7, 255, 255, 255);
+            rgb_matrix_set_color(8, 255, 255, 255);
+            rgb_matrix_set_color(3, 255, 255, 255);
+            rgb_matrix_set_color(4, 255, 255, 255);
+            rgb_matrix_set_color(5, 255, 255, 255);
+            rgb_matrix_set_color(1, 255, 255, 255);
             break;
         default:
             break;
