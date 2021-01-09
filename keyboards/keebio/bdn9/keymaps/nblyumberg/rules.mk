@@ -1,8 +1,8 @@
 # Build Options
 
 BACKLIGHT_ENABLE = no       # No backlights installed
-TAP_DANCE_ENABLE = no      # Use tap dance
-
+TAP_DANCE_ENABLE = yes      # Use tap dance
+MOUSEKEY_ENABLE = yes      # Enable Mouse Keys
 RGB_MATRIX_ENABLE = yes
 
 # Integrate with VIA for quick macro updates

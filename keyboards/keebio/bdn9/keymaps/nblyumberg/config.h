@@ -16,9 +16,10 @@
 #pragma once
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 9
-#define TAPPING_TERM 200
+#define TAPPING_TERM 250
 #define TAPPING_TERM_PER_KEY
 #define TAP_CODE_DELAY 10
+
 
 // Time out one shot layers after 3 seconds
 #define ONESHOT_TIMEOUT 3000
