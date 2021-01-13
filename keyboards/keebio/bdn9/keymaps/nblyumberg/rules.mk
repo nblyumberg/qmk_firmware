@@ -11,3 +11,4 @@ RGB_MATRIX_ENABLE = yes
 
 #Enable Console
 CONSOLE_ENABLE = yes
+BOOTMAGIC_ENABLE = lite     # Virtual DIP switch configuration
