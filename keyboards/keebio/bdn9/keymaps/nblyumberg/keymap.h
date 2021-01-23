@@ -5,10 +5,11 @@
 
 
 enum tapdance_keycodes {
-    TD_F7_CLIPSCREEN = 0,
+    TD_ESC_LAYER1 = 0,
+    TD_F7_CLIPSCREEN,
     TD_F8_CLIPSELECT,
-    TD_F9_TERMINAL,
-    TD_F10_PASTE,
+    TD_F9_PASTE,
+    TD_F10_HUEON,
     TD_F11_HUESYNC,
-    TD_ESC_LAYER1
+    TD_F12_TERMINAL
 };
