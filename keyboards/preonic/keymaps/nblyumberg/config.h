@@ -1,5 +1,8 @@
 #pragma once
 
+//Define One Shot Timeout of 3 seconds
+#define ONESHOT_TIMEOUT 3000
+
 #ifdef AUDIO_ENABLE
     #define STARTUP_SONG SONG(PREONIC_SOUND)
     // #define STARTUP_SONG SONG(NO_SOUND)
