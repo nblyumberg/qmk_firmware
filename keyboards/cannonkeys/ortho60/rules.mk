@@ -22,8 +22,8 @@ SLEEP_LED_ENABLE = yes  # Breathing sleep LED during USB suspend
 NKRO_ENABLE = yes	      # USB Nkey Rollover
 BACKLIGHT_ENABLE = yes
 RGBLIGHT_ENABLE = yes
-WS2812_DRIVER = spi
-
+# WS2812_DRIVER = spi
+ WS2812_DRIVER = bitbang
 LAYOUTS = ortho_5x12
 
 
