@@ -35,7 +35,6 @@ FAUXCLICKY_ENABLE = no      # Use buzzer to emulate clicky switches
 UNICODE_ENABLE = no         # Unicode
 UNICODEMAP_ENABLE = no      # ^^
 UCIS_ENABLE = no            # ^^
-BLUETOOTH = AdafruitBLE
 
 RGB_MATRIX_ENABLE = no
 RGB_MATRIX_DRIVER = WS2812
