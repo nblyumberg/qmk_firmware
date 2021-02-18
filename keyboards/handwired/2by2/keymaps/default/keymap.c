@@ -13,13 +13,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // Default Layer
   LAYOUT(
     KC_A , KC_B,
-    KC_C , KC_D
+    TG(1) , TG(2)
   ),
   //2nd layer
     LAYOUT(
-    KC_Z , KC_Y,
-    _______ , KC_ENT
-  )
+    RGB_MOD , RGB_TOG,
+    RESET , EEPROM_RESET
+  ),
+   LAYOUT(
+    KC_X, KC_Y,
+    KC_Z, KC_0
+
+   )
 };
 
 /*

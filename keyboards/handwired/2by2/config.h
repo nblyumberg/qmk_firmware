@@ -40,7 +40,7 @@
 /* RGB Setup */
 #define DRIVER_LED_TOTAL 1
 #define RGB_DI_PIN C6
-
+#define RGBLED_NUM 1
 #define B6_AUDIO
 
 #ifdef AUDIO_ENABLE
