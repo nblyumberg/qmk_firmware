@@ -2,6 +2,7 @@
 
 //Define One Shot Timeout of 3 seconds
 #define ONESHOT_TIMEOUT 3000
+#define AUTO_SHIFT_TIMEOUT 200
 
 #define RGBLIGHT_LAYERS
 #ifdef AUDIO_ENABLE
