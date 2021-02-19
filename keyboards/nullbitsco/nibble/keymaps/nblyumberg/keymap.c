@@ -168,20 +168,6 @@ void change_RGB(bool clockwise) {
     }
 }
 
-void encoder_update_kb(uint8_t index, bool clockwise) {
-  if (layer_state_is(1)) {
-    //change RGB settings
-    change_RGB(clockwise);
-  }
-  else {
-    if (clockwise) {
-      tap_code(KC_VOLU);
-  } else {
-      tap_code(KC_VOLD);
-    }
-  }
-}
-
 void matrix_init_user(void) {
   // Initialize remote keyboard, if connected (see readme)
   matrix_init_remote_kb();
