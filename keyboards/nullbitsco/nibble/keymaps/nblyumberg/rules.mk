@@ -11,3 +11,5 @@ SRC += keymaps/via/via_extras.c
 
 # Enable Tap Dance
 TAP_DANCE = yes
+IGNORE_MOD_TAP_INTERRUPT = yes
+150TAPPING_TERM = 200
