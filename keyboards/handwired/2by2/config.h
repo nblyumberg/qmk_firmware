@@ -46,3 +46,5 @@
 #ifdef AUDIO_ENABLE
     #define STARTUP_SONG SONG(PREONIC_SOUND)
 #endif
+#define OLED_DISPLAY_128X64
+#define OLED_TIMEOUT 0
