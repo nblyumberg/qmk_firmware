@@ -5,7 +5,7 @@
 #define NICK_SOUND HD_NOTE(_C8), HD_NOTE(_D3), HD_NOTE(_C6)
 
 
-float layer0_song[][2] = SONG(NICK_SOUND);
+float layer0_song[][2] = SONG(VIOLIN_SOUND);
 float layer1_song[][2] = SONG(COLEMAK_SOUND);
 #endif
 

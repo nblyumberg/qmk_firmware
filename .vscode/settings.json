@@ -22,5 +22,9 @@
     "[markdown]": {
         "editor.trimAutoWhitespace": false,
         "files.trimTrailingWhitespace": false
-    }
+    },
+    "favorites.resources": [
+        "keyboards/handwired/2by2",
+        "quantum/audio"
+    ]
 }
