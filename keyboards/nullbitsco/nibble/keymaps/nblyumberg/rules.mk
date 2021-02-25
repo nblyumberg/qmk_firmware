@@ -1,5 +1,5 @@
 # Enable bootmagic to allow EEPROM reset with
-BOOTMAGIC_ENABLE = lite
+BOOTMAGIC_ENABLE = full
 
 # Enable the VIA Integration
 VIA_ENABLE = yes
@@ -10,6 +10,6 @@ SRC += keymaps/via/nibble_encoder.c
 SRC += keymaps/via/via_extras.c
 
 # Enable Tap Dance
-TAP_DANCE = yes
+TAP_DANCE_ENABLE = yes
 IGNORE_MOD_TAP_INTERRUPT = yes
 150TAPPING_TERM = 200
