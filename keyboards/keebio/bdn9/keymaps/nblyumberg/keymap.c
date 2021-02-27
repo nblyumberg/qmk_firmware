@@ -220,8 +220,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [ADJUST] = LAYOUT(
         EEPROM_RESET, TO(BASE), RESET,
-        RGB_VAI, RGB_SAI, RGB_HUI,
-        RGB_VAD, RGB_SAD, RGB_HUD
+        RGB_RMOD, RGB_VAI, RGB_MOD,
+        RGB_HUD, RGB_VAD, RGB_HUI
     ),
 };
 
