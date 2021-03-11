@@ -1,2 +1,2 @@
 SRC += muse.c
-AUTO_SHIFT_ENABLE = yes
+AUTO_SHIFT_ENABLE = no
