@@ -10,6 +10,6 @@ enum tapdance_keycodes {
     TD_F8_CLIPSELECT,
     TD_F9_PASTE,
     TD_F10_HUEON,
-    TD_F11_HUESYNC,
-    TD_F12_TERMINAL
+    TD_F11_HUEMUSIC,
+    TD_F12_HUEVIDEO
 };
