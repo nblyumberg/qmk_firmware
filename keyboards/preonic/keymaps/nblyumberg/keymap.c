@@ -32,10 +32,6 @@ enum preonic_keycodes {
   BACKLIT
 };
 
-// Light LEDs in white when keyboard trilayer is active
-const rgblight_segment_t PROGMEM tri_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 9, HSV_ORANGE}
-);
 // Light LEDs in green when keyboard raise layer is active
 const rgblight_segment_t PROGMEM raise_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 9, HSV_GREEN}
@@ -44,7 +40,10 @@ const rgblight_segment_t PROGMEM raise_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 const rgblight_segment_t PROGMEM lower_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 9, HSV_BLUE}
 );
-
+// Light LEDs in white when keyboard trilayer is active
+const rgblight_segment_t PROGMEM tri_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 9, HSV_ORANGE}
+);
 // Light LEDs in purple when keyboard layer 4 is active
 const rgblight_segment_t PROGMEM adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 9, HSV_PURPLE}
@@ -52,10 +51,10 @@ const rgblight_segment_t PROGMEM adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 
 // Now define the array of layers. Later layers take precedence
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-    tri_layer,
     raise_layer,
     lower_layer,
-    adjust_layer
+     tri_layer,
+     adjust_layer
 );
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -170,9 +169,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     state = update_tri_layer_state(state, _LOWER, _RAISE, _TRI);
-    rgblight_set_layer_state(_TRI, layer_state_cmp(state, _TRI));
     rgblight_set_layer_state(_RAISE, layer_state_cmp(state, _RAISE));
     rgblight_set_layer_state(_LOWER, layer_state_cmp(state, _LOWER));
+    rgblight_set_layer_state(_TRI, layer_state_cmp(state, _TRI));
     rgblight_set_layer_state(_ADJUST, layer_state_cmp(state, _ADJUST));
     return state;
 }
