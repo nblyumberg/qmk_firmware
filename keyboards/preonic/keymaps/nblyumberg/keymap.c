@@ -34,7 +34,7 @@ enum preonic_keycodes {
 
 // Light LEDs in white when keyboard layer 1 is active
 const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 9, HSV_WHITE}
+    {0, 9, HSV_PURPLE}
 );
 // Light LEDs in green when keyboard layer 2 is active
 const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
@@ -45,11 +45,23 @@ const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 9, HSV_BLUE}
 );
 
+// Light LEDs in purple when keyboard layer 4 is active
+const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 9, HSV_PURPLE}
+);
+
+// Light LEDs in purple when keyboard layer 4 is active
+const rgblight_segment_t PROGMEM my_layer5_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 9, HSV_ORANGE}
+);
+
 // Now define the array of layers. Later layers take precedence
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     my_layer1_layer,
     my_layer2_layer,
-    my_layer3_layer
+    my_layer3_layer,
+    my_layer4_layer,
+    my_layer5_layer
 );
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -131,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_TRI] = LAYOUT_preonic_grid(
-  RESET,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
+  RESET,    TG(_ADJUST),    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
   KC_GRV,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
   KC_DEL,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS,
   _______,  KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______,
@@ -167,6 +179,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(1, layer_state_cmp(state, 1));
     rgblight_set_layer_state(2, layer_state_cmp(state, 2));
     rgblight_set_layer_state(3, layer_state_cmp(state, 3));
+    rgblight_set_layer_state(4, layer_state_cmp(state, 4));
+    rgblight_set_layer_state(5, layer_state_cmp(state, 5));
     return state;
 }
 
@@ -200,6 +214,7 @@ void matrix_scan_user(void) {
 bool music_mask_user(uint16_t keycode) {
   switch (keycode) {
     case RAISE:
+      return false;
     case LOWER:
       return false;
     default:
