@@ -32,36 +32,30 @@ enum preonic_keycodes {
   BACKLIT
 };
 
-// Light LEDs in white when keyboard layer 1 is active
-const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 9, HSV_PURPLE}
+// Light LEDs in white when keyboard trilayer is active
+const rgblight_segment_t PROGMEM tri_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 9, HSV_ORANGE}
 );
-// Light LEDs in green when keyboard layer 2 is active
-const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+// Light LEDs in green when keyboard raise layer is active
+const rgblight_segment_t PROGMEM raise_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 9, HSV_GREEN}
 );
-// Light LEDs in blue when keyboard layer 3 is active
-const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+// Light LEDs in blue when keyboard lower layer is active
+const rgblight_segment_t PROGMEM lower_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 9, HSV_BLUE}
 );
 
 // Light LEDs in purple when keyboard layer 4 is active
-const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+const rgblight_segment_t PROGMEM adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 9, HSV_PURPLE}
-);
-
-// Light LEDs in purple when keyboard layer 4 is active
-const rgblight_segment_t PROGMEM my_layer5_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 9, HSV_ORANGE}
 );
 
 // Now define the array of layers. Later layers take precedence
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-    my_layer1_layer,
-    my_layer2_layer,
-    my_layer3_layer,
-    my_layer4_layer,
-    my_layer5_layer
+    tri_layer,
+    raise_layer,
+    lower_layer,
+    adjust_layer
 );
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -176,11 +170,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     state = update_tri_layer_state(state, _LOWER, _RAISE, _TRI);
-    rgblight_set_layer_state(1, layer_state_cmp(state, 1));
-    rgblight_set_layer_state(2, layer_state_cmp(state, 2));
-    rgblight_set_layer_state(3, layer_state_cmp(state, 3));
-    rgblight_set_layer_state(4, layer_state_cmp(state, 4));
-    rgblight_set_layer_state(5, layer_state_cmp(state, 5));
+    rgblight_set_layer_state(_TRI, layer_state_cmp(state, _TRI));
+    rgblight_set_layer_state(_RAISE, layer_state_cmp(state, _RAISE));
+    rgblight_set_layer_state(_LOWER, layer_state_cmp(state, _LOWER));
+    rgblight_set_layer_state(_ADJUST, layer_state_cmp(state, _ADJUST));
     return state;
 }
 
