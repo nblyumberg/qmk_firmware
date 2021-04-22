@@ -18,11 +18,11 @@
 #include "muse.h"
 
 enum preonic_layers {
-  _BASE,
-  _RAISE,
-  _LOWER,
-  _TRI,
-  _ADJUST
+  _BASE,     //  layer 0 (perm)
+  _RAISE,    //  layer 1 (temp)
+  _LOWER,    //  layer 2 (temp)
+  _TRI,      //  layer 3 (temp)
+  _ADJUST    //  layer 4 (temp)
 };
 
 enum preonic_keycodes {
@@ -32,6 +32,10 @@ enum preonic_keycodes {
   BACKLIT
 };
 
+// Light LEDs in green when keyboard base layer is active. (Note: This is never called, just used to adjust the )
+const rgblight_segment_t PROGMEM base_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 9, HSV_CYAN}
+);
 // Light LEDs in green when keyboard raise layer is active
 const rgblight_segment_t PROGMEM raise_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 9, HSV_GREEN}
@@ -51,10 +55,11 @@ const rgblight_segment_t PROGMEM adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 
 // Now define the array of layers. Later layers take precedence
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    base_layer,
     raise_layer,
     lower_layer,
-     tri_layer,
-     adjust_layer
+    tri_layer,
+    adjust_layer
 );
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -157,7 +162,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_preonic_grid(
-  RGB_MOD,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
+  RGB_MOD,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  TO(0),
   RGB_RMOD, RESET,   DEBUG,   _______, _______, _______, _______, TERM_ON, TERM_OFF,_______, _______, KC_DEL,
   _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  _______, _______, _______, _______,
   _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______,
