@@ -16,6 +16,7 @@
 
 #include QMK_KEYBOARD_H
 #include "muse.h"
+#include "print.h" //included to allow for debugging
 
 enum preonic_layers {
   _BASE,     //  layer 0 (perm)
@@ -31,6 +32,10 @@ enum preonic_keycodes {
   RAISE,
   BACKLIT
 };
+
+#if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
+static uint32_t rgb_preview_timer = 0;
+#endif
 
 // Light LEDs in green when keyboard base layer is active. (Note: This is never called, just used to adjust the )
 const rgblight_segment_t PROGMEM base_layer[] = RGBLIGHT_LAYER_SEGMENTS(
@@ -178,6 +183,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(_LOWER, layer_state_cmp(state, _LOWER));
     rgblight_set_layer_state(_TRI, layer_state_cmp(state, _TRI));
     rgblight_set_layer_state(_ADJUST, layer_state_cmp(state, _ADJUST));
+    xprintf("Layer State: 0b%032lb (%u)\n", state, get_highest_layer(state)); //Print current layer
     return state;
 }
 
@@ -188,6 +194,14 @@ uint8_t muse_offset = 70;
 uint16_t muse_tempo = 50;
 
 void matrix_scan_user(void) {
+    # if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
+    if (rgb_preview_timer && TIMER_DIFF_32(timer_read32(), rgb_preview_timer) > 10000) {
+        rgb_preview_timer = 0;
+        default_layer_state_set_user(default_layer_state);
+        layer_state_set_user(layer_state);
+        led_update_user((led_t) host_keyboard_leds());
+    }
+# endif
 #ifdef AUDIO_ENABLE
     if (muse_mode) {
         if (muse_counter == 0) {
@@ -206,6 +220,20 @@ void matrix_scan_user(void) {
         }
     }
 #endif
+}
+
+void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+# if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
+  switch (keycode) {
+    case RGB_TOG ... VLK_TOG:
+      for (uint8_t i = 0; i < RGBLIGHT_MAX_LAYERS; i++) {
+        rgblight_set_layer_state(i, false);
+      }
+      rgb_preview_timer = timer_read32();
+      break;
+  }
+# endif
+  return;
 }
 
 bool music_mask_user(uint16_t keycode) {
